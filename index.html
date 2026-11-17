@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   <title>Mini App</title>
   <script src="https://telegram.org"></script>
   <style>
@@ -16,14 +16,13 @@
     }
     #desktop-container {
       width: 1088px;
-      transform-origin: top left;
     }
   </style>
 </head>
 <body>
 
   <div id="desktop-container">
-    <iframe src="https://app.lumi.education/api/v1/run/XtsPwC/embed" width="1088" height="720" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe><script src="https://app.Lumi.education/api/v1/h5p/core/js/h5p-resizer.js" charset="UTF-8"></script>
+    <iframe src="https://lumi.education" width="1088" height="720" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe><script src="https://lumi.education" charset="UTF-8"></script>
   </div>
 
   <script>
@@ -34,14 +33,17 @@
       tg.requestFullscreen();
     }
 
-    function scaleToDesktop() {
+    function fitDesktopView() {
       const container = document.getElementById('desktop-container');
-      const scale = window.innerWidth / 1088;
-      container.style.transform = `scale(${scale})`;
+      const realScreenWidth = document.documentElement.clientWidth || window.innerWidth;
+      const scale = realScreenWidth / 1088;
+      container.style.zoom = scale;
     }
 
-    scaleToDesktop();
-    window.addEventListener('resize', scaleToDesktop);
+    fitDesktopView();
+    window.addEventListener('resize', fitDesktopView);
+    setTimeout(fitDesktopView, 300);
+    setTimeout(fitDesktopView, 1000);
   </script>
 </body>
 </html>
