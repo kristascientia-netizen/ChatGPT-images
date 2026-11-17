@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Forces desktop mode (1088px wide) on both phones and PCs -->
+  <meta name="viewport" content="width=1088" />
+  <title>Mini App</title>
+  <script src="https://telegram.org"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 1088px;
+      min-height: 100vh;
+      background-color: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .embed-wrapper {
+      width: 1088px;
+    }
+    iframe {
+      display: block;
+      width: 1088px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="embed-wrapper">
+    <iframe src="https://app.lumi.education/api/v1/run/XtsPwC/embed" width="1088" height="720" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe>
+    <script src="https://app.lumi.education/api/v1/h5p/core/js/h5p-resizer.js" charset="UTF-8"></script>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+    if (tg.requestFullscreen) {
+      tg.requestFullscreen();
+    }
+  </script>
+</body>
+</html>
