@@ -1,9 +1,11 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Request desktop-sized layout -->
+  <meta name="viewport" content="width=1088">
 
   <title>Krista's Interactive Classroom</title>
 
@@ -11,75 +13,34 @@
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html, body {
       width: 100%;
-      min-height: 100%;
-      background: #000;
-      overflow-x: hidden;
-    }
-
-    #wrapper {
-      width: 100%;
-      overflow: hidden;
-      background: #000;
-    }
-
-    #desktop {
-      width: 1088px;
-      height: 720px;
-      position: relative;
-      left: 50%;
-      transform-origin: top center;
+      height: 100%;
+      background: black;
     }
 
     iframe {
       display: block;
-      width: 1088px !important;
-      height: 720px !important;
-      border: 0;
+      width: 1088px;
+      height: 720px;
+      border: none;
     }
   </style>
 </head>
 
 <body>
 
-  <div id="wrapper">
-    <div id="desktop">
-      <iframe
-        src="https://app.lumi.education/api/v1/run/XtsPwC/embed"
-        width="1088"
-        height="720"
-        frameborder="0"
-        allowfullscreen="allowfullscreen"
-        allow="geolocation *; microphone *; camera *; midi *; encrypted-media *">
-      </iframe>
-    </div>
-  </div>
+  <iframe
+    src="https://app.lumi.education/api/v1/run/XtsPwC/embed"
+    width="1088"
+    height="720"
+    allowfullscreen
+    allow="geolocation *; microphone *; camera *; midi *; encrypted-media *">
+  </iframe>
 
-  <script src="https://app.lumi.education/api/v1/h5p/core/js/h5p-resizer.js"
-    charset="UTF-8"></script>
-
-  <script>
-    const desktop = document.getElementById("desktop");
-    const wrapper = document.getElementById("wrapper");
-
-    function resizeDesktop() {
-      const scale = Math.min(window.innerWidth / 1088, 1);
-
-      desktop.style.transform =
-        `translateX(-50%) scale(${scale})`;
-
-      wrapper.style.height = `${720 * scale}px`;
-    }
-
-    window.addEventListener("resize", resizeDesktop);
-    window.addEventListener("orientationchange", resizeDesktop);
-
-    resizeDesktop();
-  </script>
+  <script src="https://app.lumi.education/api/v1/h5p/core/js/h5p-resizer.js"></script>
 
 </body>
 </html>
