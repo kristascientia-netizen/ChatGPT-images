@@ -1,59 +1,85 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-  <title>Mini App</title>
-  <script src="https://telegram.org"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Krista's Interactive Classroom</title>
+
   <style>
     * {
-      box-sizing: border-box;
-    }
-    html, body {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
       width: 100%;
-      height: 100%;
-      background-color: #000000;
+      min-height: 100%;
+      background: #000;
       overflow-x: hidden;
     }
-    #desktop-container {
+
+    #wrapper {
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #desktop {
       width: 1088px;
-      transform-origin: 0 0;
-      position: absolute;
-      top: 0;
-      left: 0;
+      height: 720px;
+      position: relative;
+      left: 50%;
+      transform-origin: top center;
+    }
+
+    iframe {
+      display: block;
+      width: 1088px !important;
+      height: 720px !important;
+      border: 0;
     }
   </style>
 </head>
+
 <body>
 
-  <div id="desktop-container">
-    <iframe src="https://app.lumi.education/api/v1/run/XtsPwC/embed" width="1088" height="720" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe><script src="https://app.Lumi.education/api/v1/h5p/core/js/h5p-resizer.js" charset="UTF-8"></script>
+  <div id="wrapper">
+    <div id="desktop">
+      <iframe
+        src="https://app.lumi.education/api/v1/run/XtsPwC/embed"
+        width="1088"
+        height="720"
+        frameborder="0"
+        allowfullscreen="allowfullscreen"
+        allow="geolocation *; microphone *; camera *; midi *; encrypted-media *">
+      </iframe>
+    </div>
   </div>
 
+  <script src="https://app.lumi.education/api/v1/h5p/core/js/h5p-resizer.js"
+    charset="UTF-8"></script>
+
   <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
-    if (tg.requestFullscreen) {
-      tg.requestFullscreen();
+    const desktop = document.getElementById("desktop");
+    const wrapper = document.getElementById("wrapper");
+
+    function resizeDesktop() {
+      const scale = Math.min(window.innerWidth / 1088, 1);
+
+      desktop.style.transform =
+        `translateX(-50%) scale(${scale})`;
+
+      wrapper.style.height = `${720 * scale}px`;
     }
 
-    function fitLikeDesktop() {
-      const container = document.getElementById('desktop-container');
-      const phoneWidth = window.visualViewport ? window.visualViewport.width : document.documentElement.clientWidth;
-      const scale = phoneWidth / 1088;
-      container.style.transform = `scale(${scale})`;
-    }
+    window.addEventListener("resize", resizeDesktop);
+    window.addEventListener("orientationchange", resizeDesktop);
 
-    fitLikeDesktop();
-    window.addEventListener('resize', fitLikeDesktop);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', fitLikeDesktop);
-    }
-    setTimeout(fitLikeDesktop, 200);
-    setTimeout(fitLikeDesktop, 800);
+    resizeDesktop();
   </script>
+
 </body>
 </html>
