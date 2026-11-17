@@ -6,6 +6,9 @@
   <title>Mini App</title>
   <script src="https://telegram.org"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     html, body {
       margin: 0;
       padding: 0;
@@ -16,13 +19,17 @@
     }
     #desktop-container {
       width: 1088px;
+      transform-origin: 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   </style>
 </head>
 <body>
 
   <div id="desktop-container">
-    <iframe src="https://lumi.education" width="1088" height="720" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe><script src="https://lumi.education" charset="UTF-8"></script>
+    <iframe src="https://app.lumi.education/api/v1/run/XtsPwC/embed" width="1088" height="720" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *"></iframe><script src="https://app.Lumi.education/api/v1/h5p/core/js/h5p-resizer.js" charset="UTF-8"></script>
   </div>
 
   <script>
@@ -33,17 +40,20 @@
       tg.requestFullscreen();
     }
 
-    function fitDesktopView() {
+    function fitLikeDesktop() {
       const container = document.getElementById('desktop-container');
-      const realScreenWidth = document.documentElement.clientWidth || window.innerWidth;
-      const scale = realScreenWidth / 1088;
-      container.style.zoom = scale;
+      const phoneWidth = window.visualViewport ? window.visualViewport.width : document.documentElement.clientWidth;
+      const scale = phoneWidth / 1088;
+      container.style.transform = `scale(${scale})`;
     }
 
-    fitDesktopView();
-    window.addEventListener('resize', fitDesktopView);
-    setTimeout(fitDesktopView, 300);
-    setTimeout(fitDesktopView, 1000);
+    fitLikeDesktop();
+    window.addEventListener('resize', fitLikeDesktop);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', fitLikeDesktop);
+    }
+    setTimeout(fitLikeDesktop, 200);
+    setTimeout(fitLikeDesktop, 800);
   </script>
 </body>
 </html>
